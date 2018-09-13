@@ -1,132 +1,138 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-1 p">
-			<button type="button" class="btn" id="backButton" [routerLink]="['/login']">Back</button>
-		</div>
-		<div class="col-6 offset-5 pp">
+		<div class="col-6 offset-6">
 			<img width="500" src="assets\img\Logo_sfondo_trasparente.png"
 				class="img-fluid float-right" alt="Responsive image">
 		</div>
-		
-								<div class="w-100"></div>
-		
+	</div>
 
-		<div class="col-6 offset-3">
-			<div class="col-6 offset-3 signUpLabelCol">Create an account</div>
-			<div class="w-100"></div>
-			<div class="col-6 offset-3 signupColon">
-				<form #signupForm="ngForm" novalidate (ngSubmit)="submit()">
-					<div class="form-row">
-						<div class="form-group col-sm-6">
-							<label for="firstName">First name</label> <input type="text"
-								class="form-control" id="firstName " placeholder="First name"
-								name="name" [(ngModel)]="_name" required>
-						</div>
-						<div class="form-group col-sm-6">
-							<label for="surname">Surname</label> <input type="text"
-								class="form-control" name="surname" id="surname"
-								[(ngModel)]="_surname" placeholder="Surname" required>
-						</div>
+	<div class="row signUpRow">
+		<div class="col-8 offset-2">
+			<div class="card">
+				<div class="card-header">
+					<h2>Create an account</h2>
+				</div>
+				<div class="card-body">
+					<form #signupForm="ngForm" novalidate (ngSubmit)="submit()">
+						<div class="form-row">
+							<div class="form-group col-sm-12 col-md">
+								<label for="firstName">First name</label> <input type="text"
+									class="form-control" id="firstName " placeholder="First name"
+									name="name" [(ngModel)]="_name" required>
+							</div>
+							<div class="form-group col-sm-12 col-md">
+								<label for="surname">Surname</label> <input type="text"
+									class="form-control" name="surname" id="surname"
+									[(ngModel)]="_surname" placeholder="Surname" required>
+							</div>
 
-						<div class="w-100"></div>
-
-						<div class="form-group col-sm">
-							<label for="datePicker">Date of birth</label>
-							<div class="input-group" id="datePicker">
-								<input class="form-control" placeholder="yyyy-mm-dd" name="dp"
-									id="date" readonly required [(ngModel)]="_date" ngbDatepicker
-									#d="ngbDatepicker">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary calendar"
-										(click)="d.toggle()" type="button"></button>
+							<div class="form-group col-sm-12 col-md">
+								<label for="datePicker">Date of birth</label>
+								<div class="input-group" id="datePicker">
+									<input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+										id="date" readonly required [(ngModel)]="_date" ngbDatepicker
+										#d="ngbDatepicker">
+									<div class="input-group-append">
+										<button class="btn btn-outline-secondary calendar"
+											(click)="d.toggle()" type="button"></button>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="w-100"></div>
+							<div class="form-group col-sm-12 col-md">
+								<label for="genderRadio">Gender</label>
+								<div class="form group form-check" id="genderRadio">
+									<label class="form-check-label"> <input type="radio"
+										class="form-check-input" name="optradio" checked
+										(click)="setradio('Male')">Male
+									</label>
+								</div>
+								<div class="w-100"></div>
 
-						<div class="form-group col-sm-6">
-							<label for="inputEmail">Email</label> <input type="email"
-								class="form-control" id="inputEmail" placeholder="Email"
-								name="email" [(ngModel)]="_email" required>
-						</div>
-						<div class="form-group col-sm-6">
-							<label for="inputNationality">Nationality</label> <select
-								id="inputNationality" class="form-control" name="state"
-								[(ngModel)]="_state" required>
-								<option selected>Choose...</option>
-								<option>...</option>
-							</select>
-						</div>
-
-						<div class="w-100"></div>
-
-						<div class="form-group col-sm-6">
-							<label for="inputCity">City</label> <select id="inputCity"
-								class="form-control" name="city" [(ngModel)]="_city">
-								<option selected>Choose...</option>
-								<option>...</option>
-							</select>
-						</div>
-
-						<div class="form-group col-sm-6">
-							<label for="inputAddress">Address</label> <input type="text"
-								class="form-control" id="inputAddress" name="address"
-								[(ngModel)]="_address" placeholder="1234 Main St">
-						</div>
-
-						<div class="w-100"></div>
-
-
-						<div class="form-group col-sm-6 ">
-							<label for="inputTelephone">Telephone</label> <input type="text"
-								class="form-control" id="inputTelephone" name="telephone"
-								[(ngModel)]="_telephone">
-						</div>
-
-						<div class="form-group col-sm-6">
-							<div class="col-sm-6">Gender</div>
-							<div class="w-100"></div>
-							<div class="form group form-check">
-								<label class="form-check-label"> <input type="radio"
-									class="form-check-input" name="optradio" checked
-									(click)="setradio('Male')">Male
-								</label>
+								<div class="form-group form-check">
+									<label class="form-check-label"> <input type="radio"
+										class="form-check-input" name="optradio"
+										(click)="setradio('Female')">Female
+									</label>
+								</div>
 							</div>
+
 							<div class="w-100"></div>
 
-							<div class="form-group form-check">
-								<label class="form-check-label"> <input type="radio"
-									class="form-check-input" name="optradio"
-									(click)="setradio('Female')">Female
-								</label>
+
+							<div class="form-group col-sm-12 col-md">
+								<label for="inputEmail">Email</label> <input type="email"
+									pattern=".+@.+" class="form-control" id="inputEmail"
+									placeholder="Email" name="email" [(ngModel)]="_email" required>
 							</div>
+							<div class="form-group col-sm-12 col-md">
+								<label for="inputNationality">Nationality</label> <select
+									id="inputNationality" class="form-control" name="state"
+									[(ngModel)]="_state" required>
+									<option selected>Choose...</option>
+									<option>...</option>
+								</select>
+							</div>
+
+
+							<div class="form-group col-sm-12 col-md">
+								<label for="inputCity">City</label> <select id="inputCity"
+									class="form-control" name="city" [(ngModel)]="_city">
+									<option selected>Choose...</option>
+									<option>...</option>
+								</select>
+							</div>
+
+							<div class="form-group col-sm-12 col-md">
+								<label for="inputAddress">Address</label> <input type="text"
+									class="form-control" id="inputAddress" name="address"
+									[(ngModel)]="_address" placeholder="1234 Main St">
+							</div>
+
+
+							<div class="form-group col-sm-12 col-md ">
+								<label for="inputTelephone">Telephone</label> <input type="text"
+									class="form-control" id="inputTelephone" name="telephone"
+									[(ngModel)]="_telephone">
+							</div>
+
+							<div class="w-100"></div>
+
+							<div class="form-group col-sm-12 col-md">
+								<label for="inputPassword">Password</label> <input
+									type="password" class="form-control" id="inputPassword"
+									placeholder="Password*" name="password" [(ngModel)]="_password"
+									required>
+							</div>
+
+							<div class="form-group col-sm-12 col-md">
+								<label for="inputConfirmPassword">Confirm password</label> <input
+									type="password" class="form-control" id="inputConfirmPassword"
+									placeholder="Confirm password*" name="confirmPassword"
+									[(ngModel)]="_confirmPassword" required>
+							</div>
+
+
 						</div>
 
+						<div class="card">
+							<div class="card-body">
+										<button type="submit" class="btn btn-success" id="backButton"
+											[routerLink]="['/login']">Back</button>
 
-						<div class="w-100"></div>
-
-
-						<div class="form-group col-sm-6">
-							<label for="inputPassword">Password</label> <input
-								type="password" class="form-control" id="inputPassword"
-								placeholder="Password*" name="password" [(ngModel)]="_password"
-								required>
+										<button type="submit" class="btn btn-success"
+											id="signUpButton" [disabled]="!signupForm.form.valid">Sign
+											Up</button>
+							</div>
+							
 						</div>
 
-						<div class="form-group col-sm-6">
-							<label for="inputConfirmPassword">Confirm password</label> <input
-								type="password" class="form-control" id="inputConfirmPassword"
-								placeholder="Confirm password*" name="confirmPassword"
-								[(ngModel)]="_confirmPassword" required>
-						</div>
+					</form>
 
-						<button type="submit" class="btn btn-primary" id="signUpButton"
-							[disabled]="!signupForm.form.valid">Sign Up</button>
+				</div>
 
-					</div>
-				</form>
 			</div>
 		</div>
+
 	</div>
 </div>
