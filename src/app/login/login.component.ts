@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit() {
-    
+  submit() {    
     this._email = '';
     this._password = '';
     this._rememberPassword = false;
