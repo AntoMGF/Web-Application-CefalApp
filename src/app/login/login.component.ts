@@ -31,6 +31,6 @@ export class LoginComponent implements OnInit {
     },
     // success path
       error => alert('errore'));
-    alert(this.config['heroesUrl'])
+    alert(this.config['heroesUrl']);
   }
 }

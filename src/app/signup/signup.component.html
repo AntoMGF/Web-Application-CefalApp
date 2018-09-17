@@ -6,8 +6,8 @@
 		</div>
 	</div>
 
-	<div class="row signUpRow">
-		<div class="col-8 offset-2">
+	<div class="row align-items-center signUpRow mt-5">
+		<div class="col-8 row align-items-center offset-2">
 			<div class="card">
 				<div class="card-header">
 					<h2>Create an account</h2>
@@ -117,14 +117,13 @@
 
 						<div class="card">
 							<div class="card-body">
-										<button type="submit" class="btn btn-success" id="backButton"
-											[routerLink]="['/login']">Back</button>
+								<button type="submit" class="btn btn-success" id="backButton"
+									[routerLink]="['/login']">Back</button>
 
-										<button type="submit" class="btn btn-success"
-											id="signUpButton" [disabled]="!signupForm.form.valid">Sign
-											Up</button>
+								<button type="submit" class="btn btn-success" id="signUpButton"
+									[disabled]="!signupForm.form.valid">Sign Up</button>
 							</div>
-							
+
 						</div>
 
 					</form>
@@ -135,4 +134,6 @@
 		</div>
 
 	</div>
+
+
 </div>
