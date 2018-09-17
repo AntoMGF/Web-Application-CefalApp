@@ -7,12 +7,18 @@ import {SignupComponent} from './signup/signup.component';
 import {AppRoutingModule} from './/app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
+import { UserComponentComponent } from './user-component/user-component.component';
+import { SettingscomponentComponent } from './settingscomponent/settingscomponent.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    UserComponentComponent,
+    SettingscomponentComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
