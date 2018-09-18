@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
   _email = '';
   _password = '';
   _rememberPassword = false;
-
+  signUpPath='/signup';
+  userPagePath='/user';
   private config: Object;
 
   constructor(private connectionService: ConnectionService) {}

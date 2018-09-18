@@ -1,9 +1,10 @@
-<div class="row mt-5">
-  <div class="col-6 offset-3 profile">
-    <div class="card">
+<div class="row mt-2">
+  <div class="card col-6 offset-3 profile">
+    <div class="card mt-3 profileCard">
       <div class="card-header">
         User Details
       </div>
+
 
       <div class="card-body">
         <div class="row">
@@ -31,5 +32,38 @@
         <button class="btn btn-success" type="submit">Edit Profile</button>
       </div>
     </div>
+
+    <div class="card mt-3 mb-3 statisticCard">
+      <div class="card-body">
+
+        <form #signupForm="ngForm" id="signForm" novalidate (ngSubmit)="submit()">
+          <div class="form-row">
+
+            <div class="form-group col-sm-12 col-md">
+              <label for="migraineInput" class="migrainLabel">Days without migraine</label>
+              <input type="number" class="form-control" id="migraineInput" name="migraineHous" [(ngModel)]="_migraineHours">
+            </div>
+
+            <div class="form-group col-sm-12 col-md">
+              <label for="sleepInput">Hours of sleep</label>
+              <input type="number" class="form-control" id="sleepInput" name="sleepHours" [(ngModel)]="_sleepHours">
+            </div>
+
+            <div class="form-group col-sm-12 col-md">
+              <label for="phoneUsageInput">Phone usage time (hours)</label>
+              <input type="number" class="form-control" id="phoneUsageInput" name="phoneUsageHours" [(ngModel)]="_phoneUsageHours">
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer d-flex justify-content-end">
+        <button form="signForm" type="cubmit" class="btn btn-success">Statistics</button>
+
+      </div>
+
+
+    </div>
+
   </div>
 </div>

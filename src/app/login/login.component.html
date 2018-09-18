@@ -34,12 +34,12 @@
 								me</label>
 						</div>
 						<button type="submit" class="btn btn-success" id="signInButton"
-							[disabled]="!loginForm.form.valid" [routerLink]="['/user']">Sign In
+							[disabled]="!loginForm.form.valid" [routerLink]="[userPagePath]">Sign In
 							
 						</button>
 					</form>
 					<label class="signUpRequestLabel">You don't have any
-						account? <a [routerLink]="['/signup']">Sign Up</a>
+						account? <a [routerLink]="[signUpPath]">Sign Up</a>
 					</label>
 				</div>
 			</div>

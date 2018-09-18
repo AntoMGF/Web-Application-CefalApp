@@ -12,7 +12,7 @@
 					<h2>Create an account</h2>
 				</div>
 				<div class="card-body">
-					<form #signupForm="ngForm" novalidate (ngSubmit)="submit()">
+					<form #signupForm="ngForm" id="signForm" novalidate (ngSubmit)="submit()">
 						<div class="form-row">
 							<div class="form-group col-sm-12 col-md">
 								<label for="firstName">First name</label> <input type="text" class="form-control" id="firstName " placeholder="First name"
@@ -101,9 +101,9 @@
 
 				</div>
 				<div class="card-footer d-flex justify-content-between">
-					<button type="submit" class="btn btn-success" id="backButton" [routerLink]="['/login']">Back</button>
+					<button type="button" class="btn btn-success" id="backButton" [routerLink]="['/login']">Back</button>
 
-					<button type="submit" class="btn btn-success" id="signUpButton" [disabled]="!signupForm.form.valid">Sign Up</button>
+					<button type="submit" class="btn btn-success" id="signUpButton" [disabled]="!signupForm.form.valid" form="signForm" >Sign Up</button>
 
 				</div>
 			</div>
