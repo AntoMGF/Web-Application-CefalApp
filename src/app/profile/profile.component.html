@@ -2,7 +2,7 @@
   <div class="card col-6 offset-3 profile">
     <div class="card mt-3 profileCard">
       <div class="card-header">
-        User Details
+        <h2>User Details</h2>
       </div>
 
 
@@ -41,17 +41,17 @@
 
             <div class="form-group col-sm-12 col-md">
               <label for="migraineInput" class="migrainLabel">Days without migraine</label>
-              <input type="number" class="form-control" id="migraineInput" name="migraineHous" [(ngModel)]="_migraineHours">
+              <input type="number" min="0" class="form-control" id="migraineInput" name="migraineHous" [(ngModel)]="_migraineHours">
             </div>
 
             <div class="form-group col-sm-12 col-md">
               <label for="sleepInput">Hours of sleep</label>
-              <input type="number" class="form-control" id="sleepInput" name="sleepHours" [(ngModel)]="_sleepHours">
+              <input type="number" min="0" class="form-control" id="sleepInput" name="sleepHours" [(ngModel)]="_sleepHours">
             </div>
 
             <div class="form-group col-sm-12 col-md">
               <label for="phoneUsageInput">Phone usage time (hours)</label>
-              <input type="number" class="form-control" id="phoneUsageInput" name="phoneUsageHours" [(ngModel)]="_phoneUsageHours">
+              <input type="number" min="0" class="form-control" id="phoneUsageInput" name="phoneUsageHours" [(ngModel)]="_phoneUsageHours">
             </div>
           </div>
         </form>
