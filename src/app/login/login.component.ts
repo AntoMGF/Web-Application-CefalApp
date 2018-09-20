@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   _password = '';
   _rememberPassword = false;
   signUpPath='/signup';
-  userPagePath='';
+  userPagePath='/user';
   private config: Object;
 
   constructor(private connectionService: ConnectionService) {}
@@ -24,8 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   submit() { 
-    alert(this._email + ' '+ this._password + ' '+ this._rememberPassword );
-    this.userPagePath='/user';   
     this._email = '';
     this._password = '';
     this._rememberPassword = false;
