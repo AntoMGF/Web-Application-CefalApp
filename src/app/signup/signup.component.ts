@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm, RequiredValidator} from '@angular/forms';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { NgForm, RequiredValidator } from '@angular/forms';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { SignUpData } from '../signUpData';
+import { ConnectionService } from '../connection.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +22,10 @@ export class SignupComponent implements OnInit {
   _telephone: string = '';
   _password: string = '';
   _confirmPassword: string = '';
-  constructor() {}
+
+  signUpData: SignUpData;
+
+  constructor(private connectionService: ConnectionService) { }
 
   ngOnInit() {
   }
@@ -29,7 +35,21 @@ export class SignupComponent implements OnInit {
   }
 
   submit() {
+    this.signUpData = {
+      name: this._name, lastname: this._surname, email: this._email, birthday: '' + '2018-09-05',
+      password: this._password, gender: this._gender, nationality: this._state, city: this._city, address: this._address,
+      telephone: this._telephone, rolesIdentify: "USER"
+    }
+
+
+    this.connectionService.signup(this.signUpData).subscribe((res: HttpResponse<any>) => {
+     alert('success');
+      
+    });
+    
+
+
     alert('Name: ' + this._name + 'Surname: ' + this._surname + 'Date: ' + this._date.day + 'Email: ' + this._email + 'Gender: ' + this._gender +
-       'State: ' + this._state + 'City: ' + this._city +'Address: ' + this._address +'Telephone: ' + this._telephone +'Password: ' + this._password + 'Confirm Password: ' + this._confirmPassword);
+      'State: ' + this._state + 'City: ' + this._city + 'Address: ' + this._address + 'Telephone: ' + this._telephone + 'Password: ' + this._password + 'Confirm Password: ' + this._confirmPassword);
   }
 }

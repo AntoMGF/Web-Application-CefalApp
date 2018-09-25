@@ -5,6 +5,7 @@ import * as Rx from 'rxjs';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { LoginData } from 'src/app/login-data.LoginData';
 import { LoginResponse } from '../login.response';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -29,9 +30,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-
-
-
   /* submit() { 
      this._email = '';
      this._password = '';
@@ -47,8 +45,10 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.login = { email: this._email, password: this._password };
-    this.connectionService.login(this.login).subscribe((data: JSON) => alert(data));
-
-
+    this.connectionService.login(this.login).subscribe((res: HttpResponse<any>) => {
+     
+      this.connectionService.saveTokens(res.headers.get('Authorization'),res.headers.get('Refresh'));
+      alert(res.headers.get('Authorization'))
+    });
   }
 }
