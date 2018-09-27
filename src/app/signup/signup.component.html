@@ -103,7 +103,8 @@
 				<div class="card-footer d-flex justify-content-between">
 					<button type="button" class="btn btn-success" id="backButton" [routerLink]="['/login']">Back</button>
 
-					<button type="submit" class="btn btn-success" id="signUpButton" [disabled]="!signupForm.form.valid" form="signForm" >Sign Up</button>
+					<button type="submit" class="btn btn-success" id="signUpButton" [disabled]="!(signupForm.form.valid && validPassword())"
+					 form="signForm">Sign Up</button>
 
 				</div>
 			</div>

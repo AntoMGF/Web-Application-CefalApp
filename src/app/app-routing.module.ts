@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { SettingscomponentComponent } from './settingscomponent/settingscomponent.component';
 import { UserComponentComponent } from './user-component/user-component.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthenticationService } from './authentication.service';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserComponentComponent,
+    canActivate: [AuthenticationService],
     children: [{
       path: '',
       redirectTo: 'profile',

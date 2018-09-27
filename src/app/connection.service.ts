@@ -39,7 +39,8 @@ export class ConnectionService {
       // The response body may contain clues as to what went wrong,
       if (error.status == 403) {
         alert('Non autorizzato');
-      } else {
+      } 
+      else {
         alert(
 
           `Backend returned code ${error.status}, ` +
@@ -51,6 +52,7 @@ export class ConnectionService {
       'Something bad happened; please try again later.');
   };
 
+  
   //POST Method to perform login
   /* login(loginData: LoginData): Observable<HttpResponse<any>> {
      return this._http.post<HttpResponse<any>>(this.loginConfigUrl, loginData, this.httpOptions).pipe(catchError(this.handleError));

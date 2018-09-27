@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
 
 
 @Component({
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-component.component.css']
 })
 export class UserComponentComponent implements OnInit {
-
+  display='none';
   constructor() { }
 
   ngOnInit() {
   }
 
+
+  
 }

@@ -34,6 +34,14 @@ export class SignupComponent implements OnInit {
     this._gender = gender;
   }
 
+  validPassword(): boolean {
+    if (this._password != null && this._confirmPassword != null && this._password != '' && this._confirmPassword != ''
+     && this._password === this._confirmPassword) 
+     {
+      return true;
+    }
+    return false;
+  }
   submit() {
     this.signUpData = {
       name: this._name, lastname: this._surname, email: this._email, birthday: '' + '2018-09-05',
@@ -43,10 +51,10 @@ export class SignupComponent implements OnInit {
 
 
     this.connectionService.signup(this.signUpData).subscribe((res: HttpResponse<any>) => {
-     alert('success');
-      
+      alert('success');
+
     });
-    
+
 
 
     alert('Name: ' + this._name + 'Surname: ' + this._surname + 'Date: ' + this._date.day + 'Email: ' + this._email + 'Gender: ' + this._gender +
