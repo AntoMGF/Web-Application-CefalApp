@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { UserComponentComponent } from './user-component/user-component.component';
 import { SettingscomponentComponent } from './settingscomponent/settingscomponent.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ModalerrorComponent } from './modalerror/modalerror.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProfileComponent } from './profile/profile.component';
     SignupComponent,
     UserComponentComponent,
     SettingscomponentComponent,
-    ProfileComponent
+    ProfileComponent,
+    ModalerrorComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,9 @@ import { ProfileComponent } from './profile/profile.component';
     FormsModule,
     NgbModule,
     HttpClientModule
+  ],
+  entryComponents: [
+    ModalerrorComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

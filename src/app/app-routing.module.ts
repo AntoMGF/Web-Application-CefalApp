@@ -7,6 +7,7 @@ import { SettingscomponentComponent } from './settingscomponent/settingscomponen
 import { UserComponentComponent } from './user-component/user-component.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthenticationService } from './authentication.service';
+import { ModalerrorComponent } from './modalerror/modalerror.component';
 
 const routes: Routes = [
   {

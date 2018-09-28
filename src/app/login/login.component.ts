@@ -5,8 +5,12 @@ import * as Rx from 'rxjs';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { LoginData } from 'src/app/login-data.LoginData';
 import { LoginResponse } from '../login.response';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../user.service';
+import { errorHandler } from '@angular/platform-browser/src/browser';
+import { ModalerrorComponent } from '../modalerror/modalerror.component';
+
+
 
 @Component({
   selector: 'app-login',
@@ -24,24 +28,25 @@ export class LoginComponent implements OnInit {
 
   login: LoginData;
   config: LoginResponse;
-  constructor(private connectionService: ConnectionService, private userService:UserService) { }
+  constructor(private connectionService: ConnectionService, private userService: UserService) { }
 
-  ngOnInit()
-   {
+  ngOnInit() {
     // Clear all the variables to login again
     this._email = '';
     this._password = '';
     this._rememberPassword = false;
-    this.userService.authenticated=false;
+    this.userService.authenticated = false;
   }
 
   submit() {
+
     this.login = { email: this._email, password: this._password };
-    this.connectionService.login(this.login).subscribe((res: HttpResponse<any>) =>
-     {     
-      this.connectionService.saveTokens(res.headers.get('Authorization'),res.headers.get('Refresh'));
+    this.connectionService.login(this.login).subscribe((res: HttpResponse<any>) => {
+      this.connectionService.saveTokens(res.headers.get('Authorization'), res.headers.get('Refresh'));
       alert(res.headers.get('Authorization'))
-      this.userService.authenticated=true;
-    });
+      this.userService.authenticated = true;
+    }
+    
+    );
   }
 }
