@@ -14,14 +14,4 @@ export class ModalerrorComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) { }
   ngOnInit() {
   }
-
-  public allerta(){
-    alert('ciao')
-  }
-
-  // Method to show a modal if an error happened (e.g. comunication error)
-  //showError(code: string, message: string) {
- //   this.errorMessage = message;
- //   this.modalService.open(this.errorContent, { centered: true });
-//  }
 }

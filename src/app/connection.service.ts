@@ -21,14 +21,8 @@ export interface Credentials {
 export class ConnectionService {
   credentials: Credentials;
 
+  // Variable used to save the message to be shown in the modal window
   message: string;
-  constructor(private _http: HttpClient, private modalService: NgbModal) {
-    // const modalRef = this.modalService.open(ModalerrorComponent);
-    // modalRef.componentInstance.name = 'World';
-    // modalRef.componentInstance.errorMessage= 'eccomi';
-  }
-
-
 
   //Url to perform login
   loginConfigUrl = 'http://192.168.1.26:8080/login';
@@ -36,9 +30,11 @@ export class ConnectionService {
   //Url to perform signup
   signUpConfigUrl = 'http://192.168.1.26:8080/home/auth/signup';
 
+  constructor(private _http: HttpClient, private modalService: NgbModal) { }
+
   showMessage(message: string) {
+    // Code to open modal window
     const modalRef = this.modalService.open(ModalerrorComponent);
-    modalRef.componentInstance.name = 'World';
     modalRef.componentInstance.errorMessage = message;
   }
 
@@ -49,7 +45,6 @@ export class ConnectionService {
       //  alert('An error occurred:' + error.error.message);
       // this._modalErrorComponent.showError();
       //const modalRef = this.modalService.open(ModalerrorComponent);
-
       this.message = 'A client-side or network error occurred. Handle it accordingly.';
       this.showMessage(this.message);
     } else {
@@ -77,17 +72,12 @@ export class ConnectionService {
 
   };
 
-
-  myf(msg: string) {
-    this.showMessage(msg);
+  showErrorModalWindow(msg: string) {
+    const modalRef = this.modalService.open(ModalerrorComponent, { centered: true });
+    modalRef.componentInstance.errorMessage = msg;
   }
 
-
-  //POST Method to perform login
-  /* login(loginData: LoginData): Observable<HttpResponse<any>> {
-     return this._http.post<HttpResponse<any>>(this.loginConfigUrl, loginData, this.httpOptions).pipe(catchError(this.handleError));
-   }
-   */
+  // HTTP options to perform post methods (login and signup)
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -96,33 +86,26 @@ export class ConnectionService {
     observe: 'response' as 'response'
   };
 
+  // Method to call login in the back-end
   login(loginData: LoginData): Observable<HttpResponse<any>> {
+    // Save the current scope to avoid problems in the catch (which uses its own scope)
     const self = this;
+    // Perform the post method
     return this._http.post<HttpResponse<any>>(this.loginConfigUrl, loginData, this.httpOptions).pipe(catchError(
       function (error: HttpErrorResponse) {
 
         if (error.error instanceof ErrorEvent) {
           // A client-side or network error occurred. Handle it accordingly.
-          //  alert('An error occurred:' + error.error.message);
-          // this._modalErrorComponent.showError();
-          //const modalRef = this.modalService.open(ModalerrorComponent);
-
-          this.message = 'A client-side or network error occurred. Handle it accordingly.';
-          self.myf('A client-side or network error occurred. Handle it accordingly.');
-        } else {
-          // The backend returned an unsuccessful response code.
-          // The response body may contain clues as to what went wrong,
-          if (error.status == 403) {
-            //this._modalErrorComponent.showError("403","A client-side or network error occurred. Handle it accordingly.");
-            self.myf('Non Autorizzato');
-
-          }
-          else {
-            //this._modalErrorComponent.showError();
-            self.myf('Backend error');
-          }
+          self.message = 'A client-side or network error occurred. Handle it accordingly.';
         }
-        // self.myf('Backend error');
+        else {
+          // The backend returned an unsuccessful response code.
+          // The response body may contain clues as to what went wrong,  
+          
+          self.message=`Backend error\nCode: ${error.status},\n`+
+           `Message: ${error.message}`;         
+        }
+        self.showErrorModalWindow( self.message);
         return throwError('Something bad happened; please try again later.')
       }
     ));

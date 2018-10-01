@@ -1,14 +1,10 @@
 <!-- Modal to show an error to the user-->
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title signOutModalTitle">An error occurred</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
+  <h4 class="modal-title" id="modal-basic-title signOutModalTitle">Error</h4>
 </div>
 
 <div class="modal-body">{{errorMessage}}</div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-success" (click)="activeModal.close(errorContent)">No</button>
-  <button type="button" id="confirmLogout" class="btn btn-success" (click)="logout();">Yes</button>
+  <button type="button" class="btn btn-success" (click)="activeModal.close(errorContent)">Close</button>
 </div>
