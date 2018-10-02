@@ -24,11 +24,16 @@ export class ConnectionService {
   // Variable used to save the message to be shown in the modal window
   message: string;
 
+  // Variable used to save the last registered email
+  private lastSavedEmail: string = '';
+  // Variable used to save the last registered password
+  private lastSavedPassword: string = '';
+
   //Url to perform login
-  loginConfigUrl = 'http://192.168.1.26:8080/login';
+  loginConfigUrl = 'http://192.168.1.110:8080/login';
 
   //Url to perform signup
-  signUpConfigUrl = 'http://192.168.1.26:8080/home/auth/signup';
+  signUpConfigUrl = 'http://192.168.1.110:8080/home/auth/signup';
 
   constructor(private _http: HttpClient, private modalService: NgbModal) { }
 
@@ -101,24 +106,78 @@ export class ConnectionService {
         else {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong,  
-          
-          self.message=`Backend error\nCode: ${error.status},\n`+
-           `Message: ${error.message}`;         
+          if (error.status == 403) {
+            self.message = `Backend error: Credentials are not correct`;
+          }
+          else {
+            self.message = `${error.message}`;
+          }
         }
-        self.showErrorModalWindow( self.message);
+
+        self.showErrorModalWindow(self.message);
         return throwError('Something bad happened; please try again later.')
       }
     ));
   }
 
   signup(signupData: SignUpData): Observable<HttpResponse<any>> {
-    return this._http.post<HttpResponse<any>>(this.signUpConfigUrl, signupData, this.httpOptions).pipe(catchError(this.handleError));
+    // Save the current scope to avoid problems in the catch (which uses its own scope)
+    const self = this;
+    return this._http.post<HttpResponse<any>>(this.signUpConfigUrl, signupData, this.httpOptions).pipe(catchError(
+      function (error: HttpErrorResponse) {
+
+        if (error.error instanceof ErrorEvent) 
+        {
+          // A client-side or network error occurred. Handle it accordingly.
+          self.message = 'A client-side or network error occurred. Handle it accordingly.';
+        }
+        else 
+        {
+          // The backend returned an unsuccessful response code.
+          // The response body may contain clues as to what went wrong, 
+          self.message = `${error.message}`;
+        }
+        self.showErrorModalWindow(self.message);
+        return throwError('Something bad happened; please try again later.')
+      }
+    ));
   }
 
+  // Save tokens i had with successfull login
   saveTokens(token: string, refreshToken: string) {
     this.credentials = { token: token, refreshToken: refreshToken };
-    console.log('salvataggio');
     console.log(this.credentials.token);
     console.log(this.credentials.refreshToken);
+  }
+
+  // Method invoked when a registration is successfull. I save the last registered email and password.
+  // I need them when i am automatically redirected to the login page
+  saveLastRegisteredCredentials(savedEmail: string, savedPassword: string) {
+    this.lastSavedEmail = savedEmail;
+    this.lastSavedPassword = savedPassword;
+  }
+
+  // Method used to check if a previous registration was performed
+  lastRegistrationPerformed(): boolean {
+    if (this.lastSavedEmail != '' && this.lastSavedPassword != '') {
+      return true;
+    }
+    return false;
+  }
+
+  // Method to clear the last saved email and password (When i am redirected to the login page after i
+  // registered, i put the data in the input fields in the page and i clear these variables)
+  clearLastRegisteredCredentials() {
+    this.lastSavedEmail = '';
+    this.lastSavedPassword = '';
+  }
+
+  // Methods to return the last saved email and password
+  getLastSavedEmail(): string {
+    return this.lastSavedEmail;
+  }
+
+  getLastSavedPassword(): string {
+    return this.lastSavedPassword;
   }
 }

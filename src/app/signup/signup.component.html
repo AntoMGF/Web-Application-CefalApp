@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-6 offset-6">
-			<img width="500" src="assets\img\Logo_sfondo_trasparente.png" class="img-fluid float-right" alt="Responsive image">
+		<div class="col-6 offset-3">
+			<img width="500" src="assets\img\Logo_sfondo_trasparente.png" class="img-fluid  mx-auto d-block" alt="Responsive image">
 		</div>
 	</div>
 
@@ -114,3 +114,15 @@
 
 
 </div>
+
+
+<!-- Modal opened if a signup is successfull-->
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title signOutModalTitle">Successfull registration</h4>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-success" (click)="modal.close(content)">Close</button>
+	</div>
+</ng-template>

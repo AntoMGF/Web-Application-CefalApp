@@ -9,8 +9,7 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/htt
 import { UserService } from '../user.service';
 import { errorHandler } from '@angular/platform-browser/src/browser';
 import { ModalerrorComponent } from '../modalerror/modalerror.component';
-
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +26,8 @@ export class LoginComponent implements OnInit {
 
   login: LoginData;
   config: LoginResponse;
-  constructor(private connectionService: ConnectionService, private userService: UserService) { }
+
+  constructor(private connectionService: ConnectionService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     // Clear all the variables to login again
@@ -36,8 +36,17 @@ export class LoginComponent implements OnInit {
     this._rememberPassword = false;
     this.userService.authenticated = false;
 
+    // Check if i am in the login page because i was redirected after a successfull signup
+    if (this.connectionService.lastRegistrationPerformed()) {
+      // Put the saved variables in the input fields
+      this._email = this.connectionService.getLastSavedEmail();
+      this._password = this.connectionService.getLastSavedPassword();
+      // Clear the last saved variables
+      this.connectionService.clearLastRegisteredCredentials();
+    }
+
     // Check if the credentials were saved in the browser
-    if (localStorage.getItem('credentials')) {
+    else if (localStorage.getItem('credentials')) {
       // Retrieve data, as a JSON
       var data = JSON.parse(localStorage.getItem('credentials'));
       // Assign the saved values to the variables (and to the input fields)
@@ -47,16 +56,14 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-
     this.login = { email: this._email, password: this._password };
     // Save data as JSON
     var savedData = JSON.stringify(this.login);
 
-    // Perform the signin 
+    // Perform the login 
     this.connectionService.login(this.login).subscribe((res: HttpResponse<any>) => {
       // Save token and refresh token
       this.connectionService.saveTokens(res.headers.get('Authorization'), res.headers.get('Refresh'));
-      alert(res.headers.get('Authorization'))
       // Check if the user wanted to save the credentials 
       if (this._rememberPassword) {
         // Save credentials
@@ -66,7 +73,10 @@ export class LoginComponent implements OnInit {
         // Delete credentials
         localStorage.removeItem('credentials');
       }
+      // I am authenticated, i will be able to move in the user pages
       this.userService.authenticated = true;
+      // Move to the user page
+      this.router.navigate(['/user']);
     }
     );
   }

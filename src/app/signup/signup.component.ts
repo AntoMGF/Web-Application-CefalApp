@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, RequiredValidator } from '@angular/forms';
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { SignUpData } from '../signUpData';
 import { ConnectionService } from '../connection.service';
 import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-signup',
@@ -25,10 +27,12 @@ export class SignupComponent implements OnInit {
 
   signUpData: SignUpData;
 
-  constructor(private connectionService: ConnectionService) { }
-
+  constructor(private connectionService: ConnectionService, private router: Router,private modalService: NgbModal) { }
+v
   ngOnInit() {
   }
+
+  @ViewChild('content') content;
 
   setradio(gender: string) {
     this._gender = gender;
@@ -51,13 +55,16 @@ export class SignupComponent implements OnInit {
 
 
     this.connectionService.signup(this.signUpData).subscribe((res: HttpResponse<any>) => {
-      alert('success');
-
+      //Save the last saved credentials (i will come back in the login page and i wil automatically put them in the input fields)
+      this.connectionService.saveLastRegisteredCredentials(this._email, this._password);
+      this.showModal(this.content);
+      // Move to the login page
+      this.router.navigate(['/login']);
     });
+  }
 
-
-
-    alert('Name: ' + this._name + 'Surname: ' + this._surname + 'Date: ' + this._date.day + 'Email: ' + this._email + 'Gender: ' + this._gender +
-      'State: ' + this._state + 'City: ' + this._city + 'Address: ' + this._address + 'Telephone: ' + this._telephone + 'Password: ' + this._password + 'Confirm Password: ' + this._confirmPassword);
+  // Method to show a modal if registration was successfull
+  showModal(content) {
+    this.modalService.open(content, { centered: true });
   }
 }
