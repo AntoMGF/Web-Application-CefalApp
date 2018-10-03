@@ -135,7 +135,7 @@ export class ConnectionService {
         {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong, 
-          self.message = `${error.message}`;
+          self.message = `${error.error.message}`;
         }
         self.showErrorModalWindow(self.message);
         return throwError('Something bad happened; please try again later.')
