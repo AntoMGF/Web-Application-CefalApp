@@ -107,7 +107,7 @@ export class ConnectionService {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong,  
           if (error.status == 403) {
-            self.message = `Backend error: Credentials are not correct`;
+            self.message = `Backend error: Credentials areng  not correct`;
           }
           else {
             self.message = `${error.message}`;
