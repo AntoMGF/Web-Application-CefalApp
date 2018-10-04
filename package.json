@@ -26,6 +26,7 @@
     "jquery": "^3.3.1",
     "js": "^0.1.0",
     "ng-bootstrap-modal": "^1.1.19",
+    "ng-http-loader": "^3.1.1",
     "popper.js": "^1.14.4",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"

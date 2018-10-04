@@ -11,6 +11,7 @@ import { UserComponentComponent } from './user-component/user-component.componen
 import { SettingscomponentComponent } from './settingscomponent/settingscomponent.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ModalerrorComponent } from './modalerror/modalerror.component';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ModalerrorComponent } from './modalerror/modalerror.component';
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    NgHttpLoaderModule
   ],
   entryComponents: [
     ModalerrorComponent
